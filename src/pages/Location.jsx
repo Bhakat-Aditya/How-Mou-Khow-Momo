@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SITE_INFO } from '../store/store'
+import SEO from '../components/SEO'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -99,6 +100,12 @@ export default function Location() {
 
   return (
     <div style={{ paddingTop: '5rem', minHeight: '100vh' }}>
+      <SEO
+        title="Location & Directions — How Mou Khow Momo, Midnapore"
+        description="Find How Mou Khow Momo at Panchur Chawk, Head Post Office Road, Dharma, Midnapore – 721101, West Bengal. Open Mon–Sun 11 AM to 10 PM. Call 8016304918."
+        canonical="https://howmoukhowmomo.in/location"
+        ogImage="https://howmoukhowmomo.in/images/steamed.png"
+      />
 
       {/* ── Hero-style Header ───────────────────────────────── */}
       <div style={{ position: 'relative', overflow: 'hidden' }}>

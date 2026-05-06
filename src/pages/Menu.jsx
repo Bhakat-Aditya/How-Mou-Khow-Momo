@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { MENU, BURGERS } from '../store/store'
+import SEO from '../components/SEO'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -225,6 +226,12 @@ export default function Menu() {
   return (
     <div style={{ paddingTop: '5rem', minHeight: '100vh' }}>
       {/* ── Page Header ─────────────────────────────────────────── */}
+      <SEO
+        title="Momo Menu & Prices — How Mou Khow Momo, Midnapore"
+        description="Full momo menu with prices at How Mou Khow Momo, Midnapore. Steamed, chilli, butter masala, pan-fried, kurkure, cheese momos & momo burgers. Half plate from ₹55, full plate from ₹85."
+        canonical="https://howmoukhowmomo.in/menu"
+        ogImage="https://howmoukhowmomo.in/images/chilli.png"
+      />
       <div className="menu-page-header">
         <div className="container">
           <div ref={headerRef}>

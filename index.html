@@ -2,37 +2,59 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary SEO -->
-    <title>How Mou Khow Momo | Best Momos in Midnapore, West Bengal</title>
-    <meta name="description" content="How Mou Khow Momo — Midnapore's favourite momo stall. Steamed, fried, chilli, butter masala, pan-fried & cheese momos. Located at Panchur Chawk, Head Post Office Road, Midnapore 721101." />
-    <meta name="keywords" content="momo midnapore, best momos midnapore, momo stall midnapore, how mou khow momo, steamed momo, chilli momo, butter masala momo, pan fried momo, momo near me midnapore, west bengal momo" />
-    <meta name="author" content="How Mou Khow Momo" />
-    <meta name="robots" content="index, follow" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/images/hero-fallback.png" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="restaurant" />
+    <!-- Default SEO (overridden per-page by react-helmet-async) -->
+    <title>How Mou Khow Momo | Best Momos in Midnapore, West Bengal</title>
+    <meta name="description" content="How Mou Khow Momo — Midnapore's favourite momo stall. Steamed, fried, chilli, butter masala, pan-fried & cheese momos. Located at Panchur Chawk, Midnapore 721101, West Bengal." />
+    <meta name="keywords" content="momo midnapore, best momos midnapore, momo stall midnapore, how mou khow momo, steamed momo, chilli momo, butter masala momo, pan fried momo, momo near me midnapore, west bengal momo, kurkure momo, cheese momo, momo burger" />
+    <meta name="author" content="How Mou Khow Momo" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="geo.region" content="IN-WB" />
+    <meta name="geo.placename" content="Midnapore" />
+    <meta name="geo.position" content="22.4239;87.3194" />
+    <meta name="ICBM" content="22.4239, 87.3194" />
+    <link rel="canonical" href="https://howmoukhowmomo.in/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="How Mou Khow Momo" />
     <meta property="og:url" content="https://howmoukhowmomo.in/" />
     <meta property="og:title" content="How Mou Khow Momo | Best Momos in Midnapore" />
-    <meta property="og:description" content="Authentic handcrafted momos served hot. 8 varieties of momos at Panchur Chawk, Midnapore, West Bengal." />
-    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:description" content="Authentic handcrafted momos served hot at Panchur Chawk, Midnapore. 8 varieties — steamed, chilli, butter masala, pan-fried and more. Starting ₹55." />
+    <meta property="og:image" content="https://howmoukhowmomo.in/images/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="How Mou Khow Momo — Midnapore's favourite momo stall" />
+    <meta property="og:locale" content="en_IN" />
 
-    <!-- Twitter Card -->
+    <!-- Twitter / X Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="How Mou Khow Momo | Best Momos in Midnapore" />
-    <meta name="twitter:description" content="Authentic handcrafted momos in Midnapore, West Bengal." />
+    <meta name="twitter:description" content="Authentic handcrafted momos at Panchur Chawk, Midnapore. 8 varieties starting ₹55." />
+    <meta name="twitter:image" content="https://howmoukhowmomo.in/images/og-image.png" />
 
-    <!-- Schema.org LocalBusiness -->
+    <!-- Schema.org: FoodEstablishment (LocalBusiness) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "FoodEstablishment",
+      "@id": "https://howmoukhowmomo.in/#restaurant",
       "name": "How Mou Khow Momo",
-      "description": "Midnapore's favourite momo stall offering steamed, fried, chilli, butter masala, and pan-fried momos.",
+      "alternateName": "Hau Mau Khau Momo",
+      "description": "Midnapore's favourite momo stall offering steamed, fried, chilli, butter masala, kurkure, cheese, pan-fried momos and momo burgers.",
       "url": "https://howmoukhowmomo.in",
       "telephone": "+918016304918",
+      "image": [
+        "https://howmoukhowmomo.in/images/butter.png",
+        "https://howmoukhowmomo.in/images/chilli.png",
+        "https://howmoukhowmomo.in/images/steamed.png"
+      ],
+      "logo": "https://howmoukhowmomo.in/favicon.svg",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Panchur Chawk, Head Post Office Road, Dharma",
@@ -46,17 +68,52 @@
         "latitude": "22.4239",
         "longitude": "87.3194"
       },
-      "openingHours": "Mo-Su 11:00-22:00",
-      "servesCuisine": "Tibetan, Indian Street Food",
+      "hasMap": "https://maps.app.goo.gl/A8MEkNGjoE6q2XSC8",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+          "opens": "11:00",
+          "closes": "22:00"
+        }
+      ],
+      "servesCuisine": ["Tibetan", "Indian Street Food", "Momos"],
       "priceRange": "₹",
-      "hasMap": "https://maps.app.goo.gl/A8MEkNGjoE6q2XSC8"
+      "currenciesAccepted": "INR",
+      "paymentAccepted": "Cash",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "100"
+      },
+      "sameAs": [
+        "https://maps.app.goo.gl/A8MEkNGjoE6q2XSC8"
+      ]
     }
     </script>
 
-    <!-- Google Fonts -->
+    <!-- Schema.org: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://howmoukhowmomo.in/" },
+        { "@type": "ListItem", "position": 2, "name": "Menu", "item": "https://howmoukhowmomo.in/menu" },
+        { "@type": "ListItem", "position": 3, "name": "Location", "item": "https://howmoukhowmomo.in/location" }
+      ]
+    }
+    </script>
+
+    <!-- Performance: Preload LCP image (hero poster shown on load) -->
+    <link rel="preload" as="image" href="/images/hero-fallback.png" fetchpriority="high" />
+
+    <!-- Google Fonts with font-display=swap to prevent render blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap&font-display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
