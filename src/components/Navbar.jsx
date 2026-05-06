@@ -1,161 +1,116 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { NAV_LINKS, SITE_INFO } from '../store/store'
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled,  setScrolled]  = useState(false)
+  const [menuOpen,  setMenuOpen]  = useState(false)
+  const [isMobile,  setIsMobile]  = useState(() => window.innerWidth < 768)
 
+  // Close mobile menu on route change / resize
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
+    const onResize = () => {
+      const mobile = window.innerWidth < 768
+      setIsMobile(mobile)
+      if (!mobile) setMenuOpen(false)   // auto-close drawer when going wide
+    }
+
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', onResize, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onResize)
+    }
   }, [])
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <div className="container">
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '1rem 0',
-        }}>
-          {/* Logo */}
-          <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <div style={{
-              width: 38,
-              height: 38,
-              borderRadius: '0.5rem',
-              background: 'var(--red)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontFamily: 'var(--font-display)',
-              fontWeight: 900,
-              fontSize: '1.1rem',
-              color: 'white',
-              flexShrink: 0,
-            }}>
-              H
-            </div>
-            <div>
-              <div style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: '1.1rem',
-                fontWeight: 700,
-                color: 'var(--text)',
-                lineHeight: 1.1,
-              }}>
-                How Mou <span style={{ color: 'var(--red)' }}>Khow</span> Momo
-              </div>
-              <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-                Midnapore, W.B.
-              </div>
-            </div>
-          </Link>
+    <>
+      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+        <div className="container">
+          <div className="nav-inner">
 
-          {/* Desktop Links */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem' }} className="hidden md:flex">
-            {NAV_LINKS.map(link => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                style={({ isActive }) => ({
-                  padding: '0.5rem 1rem',
-                  borderRadius: '0.5rem',
-                  fontSize: '0.875rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.03em',
-                  textDecoration: 'none',
-                  color: isActive ? 'var(--gold)' : 'var(--text-muted)',
-                  background: isActive ? 'rgba(244,185,66,0.08)' : 'transparent',
-                  transition: 'all 0.25s',
-                })}
-              >
-                {link.label}
-              </NavLink>
-            ))}
-            <a
-              href={`tel:${SITE_INFO.phone}`}
-              style={{
-                marginLeft: '0.75rem',
-                padding: '0.55rem 1.2rem',
-                background: 'linear-gradient(135deg, var(--red), var(--red-dark))',
-                color: 'white',
-                fontWeight: 700,
-                fontSize: '0.82rem',
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
-                borderRadius: '0.5rem',
-                textDecoration: 'none',
-                transition: 'all 0.3s ease',
-                boxShadow: '0 4px 16px rgba(230,57,70,0.3)',
-              }}
-              onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
-              onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
+            {/* ── Logo ─────────────────────────────────────────── */}
+            <Link to="/" className="nav-logo" onClick={() => setMenuOpen(false)}>
+              <div className="nav-logo-mark">H</div>
+              <div>
+                <div className="nav-logo-name">
+                  How Mou <span style={{ color: 'var(--red)' }}>Khow</span> Momo
+                </div>
+                <div className="nav-logo-sub">Midnapore, W.B.</div>
+              </div>
+            </Link>
+
+            {/* ── Desktop links (hidden on mobile via CSS) ──────── */}
+            <div className="nav-desktop-links">
+              {NAV_LINKS.map(link => (
+                <NavLink
+                  key={link.path}
+                  to={link.path}
+                  className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+              <a href={`tel:${SITE_INFO.phone}`} className="nav-call-btn">
+                Call Us
+              </a>
+            </div>
+
+            {/* ── Hamburger (hidden on desktop via CSS) ─────────── */}
+            <button
+              className="nav-burger"
+              onClick={() => setMenuOpen(o => !o)}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
             >
-              Call Us
-            </a>
-          </div>
+              <span className={`burger-icon ${menuOpen ? 'open' : ''}`}>
+                <span /><span /><span />
+              </span>
+            </button>
 
-          {/* Mobile Burger */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden"
-            style={{
-              background: 'var(--bg-elevated)',
-              border: '1px solid var(--border)',
-              borderRadius: '0.5rem',
-              padding: '0.5rem 0.75rem',
-              color: 'var(--text)',
-              cursor: 'pointer',
-              fontSize: '1rem',
-              lineHeight: 1,
-            }}
-            aria-label="Toggle navigation menu"
-          >
-            {menuOpen ? '✕' : '☰'}
-          </button>
+          </div>
         </div>
+      </nav>
 
-        {/* Mobile Menu */}
-        {menuOpen && (
-          <div style={{
-            padding: '1rem 0 1.5rem',
-            borderTop: '1px solid var(--border)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.25rem',
-          }}>
-            {NAV_LINKS.map(link => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                onClick={() => setMenuOpen(false)}
-                style={({ isActive }) => ({
-                  padding: '0.85rem 1rem',
-                  borderRadius: '0.5rem',
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                  textDecoration: 'none',
-                  color: isActive ? 'var(--gold)' : 'var(--text)',
-                  background: isActive ? 'rgba(244,185,66,0.07)' : 'transparent',
-                })}
-              >
-                {link.label}
-              </NavLink>
-            ))}
-            <a
-              href={`tel:${SITE_INFO.phone}`}
-              className="btn-primary"
-              style={{ marginTop: '0.75rem' }}
+      {/* ── Mobile drawer ─────────────────────────────────────── */}
+      <div className={`nav-drawer ${menuOpen ? 'open' : ''}`} aria-hidden={!menuOpen}>
+        <div className="nav-drawer-inner">
+          {NAV_LINKS.map(link => (
+            <NavLink
+              key={link.path}
+              to={link.path}
+              onClick={() => setMenuOpen(false)}
+              className={({ isActive }) => `nav-drawer-link ${isActive ? 'active' : ''}`}
             >
-              Call Us — {SITE_INFO.phone}
-            </a>
-          </div>
-        )}
+              {link.label}
+            </NavLink>
+          ))}
+          <a
+            href={`tel:${SITE_INFO.phone}`}
+            className="btn-primary"
+            style={{ marginTop: '0.5rem', justifyContent: 'center' }}
+            onClick={() => setMenuOpen(false)}
+          >
+            Call Us — {SITE_INFO.phone}
+          </a>
+        </div>
       </div>
-    </nav>
+
+      {/* ── Backdrop (closes drawer when tapped) ─────────────── */}
+      {menuOpen && (
+        <div
+          className="nav-backdrop"
+          onClick={() => setMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+    </>
   )
 }
